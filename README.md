@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Authentication Page with NextAuth, PostgreSQL, and Prisma
+
+This project is a simple authentication page built with Next.js. It leverages NextAuth for authentication, PostgreSQL as the database, and Prisma as the ORM.
+
+## Features
+
+- User authentication (Sign In / Sign Out)
+- Secure session management with NextAuth
+- PostgreSQL database integration via Prisma
+- Pre-configured for easy setup and deployment
+
+---
+
+## Prerequisites
+
+Before starting, ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v16 or higher)
+- [PostgreSQL](https://www.postgresql.org/) (v12 or higher)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/imtaki/NextJSAuth.git
+cd nextprismatutorial
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+# or
+yarn install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Set Up Environment Variables
 
-## Learn More
+Create a `.env` file in the root directory and configure it as follows:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
+NEXTAUTH_SECRET=your-secret-key
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Initialize Prisma
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Run the following commands to set up Prisma and sync your database schema:
 
-## Deploy on Vercel
+```bash
+npx prisma init
+npx prisma migrate dev --name init
+npx prisma generate
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 5. Start the Development Server
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
+
+---
+
+## Project Structure
+
+```
+.
+├── prisma/                # Prisma schema and migrations
+│   ├── schema.prisma      # Prisma schema
+├── pages/                 # Next.js pages
+│   ├── api/auth/[...nextauth].js # NextAuth API route
+│   ├── index.js           # Home page
+├── styles/                # CSS and styling
+├── .env                   # Environment variables
+├── README.md              # Project documentation
+├── package.json           # Project dependencies
+```
+
+---
+
+## Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/)
+- **Database**: [PostgreSQL](https://www.postgresql.org/)
+- **ORM**: [Prisma](https://www.prisma.io/)
+
+---
+
+## Acknowledgements
+
+- [Next.js](https://nextjs.org/)
+- [NextAuth.js](https://next-auth.js.org/)
+- [Prisma](https://www.prisma.io/)
+- [PostgreSQL](https://www.postgresql.org/)
